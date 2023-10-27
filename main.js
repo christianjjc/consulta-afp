@@ -31,12 +31,21 @@ async function scrapDataFromHTML(url){
     };
 }
 
+/**
+ * 
+ * @param {*} cadenaConEspacio La cadena original.
+ * @returns una cadena sin espacion a los lados y dentro de la cadena.
+ */
 function eliminaEspacios(cadenaConEspacio){
     //const cadenaSinEspacio = cadenaConEspacio.replace(/\s/g, '').replace(',', '.');
     const cadenaSinEspacio = cadenaConEspacio.replace(/[\s%]/g, '').replace(',', '.');
     return cadenaSinEspacio;
 }
 
+/**
+ * 
+ * @param {*} url La url a la que se le va a hacer SCRAPING.
+ */
 async function leerPaginaHtml(url) {
   const docHtml = await scrapDataFromHTML(url);
   const filas = docHtml.querySelectorAll('.JER_filaContenido');
@@ -56,13 +65,7 @@ async function leerPaginaHtml(url) {
   }
 }
 
-leerPaginaHtml('https://www.sbs.gob.pe/app/spp/empleadores/comisiones_spp/Paginas/comision_prima.aspx');
+const CORS_BRIDGE = 'https://cors-anywhere.herokuapp.com/';
+const URL_SCRAP = 'https://www.sbs.gob.pe/app/spp/empleadores/comisiones_spp/Paginas/comision_prima.aspx';
 
-/* async function aaa(){
-
-    const doc = await(scrapDataFromHTML("https://www.google.com"));
-    console.log(doc);
-
-}
-
-aaa(); */
+leerPaginaHtml(CORS_BRIDGE + URL_SCRAP);
